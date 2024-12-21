@@ -556,3 +556,70 @@ print("Matches found:", matches)  # Expected output: ['Mary', 'Jane', 'Sue', 'Ma
    - The print statement displays the matches found in the test string.
 
 By following these steps, we ensure that the regular expression correctly matches "Mary", "Jane", "Sue", and "Mary" again, and further match attempts should fail.
+---
+### 📄 Problem 2.9  Group and Capture Parts of the Match 
+
+Create a regular expression that matches any date in `yyyy-mm-dd` format, and separately captures the year, month, and day. The goal is to make it easy to work with these separate values in the code that processes the match. You can assume all dates in the subject text to be valid. The regular expression does not have to exclude things like 9999-99-99, as these won’t occur in the subject text at all.
+
+### 📝 Answer
+
+```python
+import re
+
+# Regular expression to match dates in yyyy-mm-dd format and capture year, month, and day
+regex_date = r'(\d{4})-(\d{2})-(\d{2})'
+
+# Test string with dates
+test_string_with_dates = "The event is scheduled on 2024-12-21. Another important date is 2023-07-15."
+
+# Find all matches and capture groups
+matches = re.findall(regex_date, test_string_with_dates)
+
+for match in matches:
+    year, month, day = match
+    print(f"Year: {year}, Month: {month}, Day: {day}")
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expression:
+
+- **Regular Expression**: `r'(\d{4})-(\d{2})-(\d{2})'`
+  - `(\d{4})`: Captures the year, which is a sequence of 4 digits.
+  - `-`: Matches the literal hyphen character.
+  - `(\d{2})`: Captures the month, which is a sequence of 2 digits.
+  - `-`: Matches the literal hyphen character.
+  - `(\d{2})`: Captures the day, which is a sequence of 2 digits.
+  - This pattern ensures that valid dates in the format `yyyy-mm-dd` are matched and the year, month, and day are captured separately.
+
+#### 🧪 Matching the Strings:
+
+- The `re.findall` function is used to find all occurrences of the patterns in the given test string.
+
+### 📝 Code Execution:
+
+```python
+import re
+
+# Regular expression to match dates in yyyy-mm-dd format and capture year, month, and day
+regex_date = r'(\d{4})-(\d{2})-(\d{2})'
+
+# Test string with dates
+test_string_with_dates = "The event is scheduled on 2024-12-21. Another important date is 2023-07-15."
+
+# Find all matches and capture groups
+matches = re.findall(regex_date, test_string_with_dates)
+
+for match in matches:
+    year, month, day = match
+    print(f"Year: {year}, Month: {month}, Day: {day}")
+```
+
+### Output:
+
+```
+Year: 2024, Month: 12, Day: 21
+Year: 2023, Month: 07, Day: 15
+```
+
+By following these steps, we ensure that the regular expression correctly matches dates in the `yyyy-mm-dd` format and captures the year, month, and day separately. This makes it easy to work with these values in the code that processes the match.
