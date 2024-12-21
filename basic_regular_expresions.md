@@ -746,3 +746,140 @@ Magical dates found: ['2008-08-08', '2011-11-11']
 ```
 
 By following these steps, we ensure that the regular expression correctly matches "magical" dates in the `yyyy-mm-dd` format and captures the full date for further processing.
+---
+### 📄 Problem 2.11  Capture and Name Parts of the Match
+
+1. Create a regular expression that matches any date in `yyyy-mm-dd` format and separately captures the year, month, and day with descriptive names.
+2. Create another regular expression that matches “magical” dates in `yyyy-mm-dd` format. A date is magical if the year minus the century, the month, and the day of the month are all the same numbers. Capture the magical number and label it “magic.”
+
+### 📝 Answer
+
+#### 1. Regular Expression to Match Any Date in `yyyy-mm-dd` Format and Capture Year, Month, and Day:
+
+To match dates in `yyyy-mm-dd` format and separately capture the year, month, and day with descriptive names, we can use named capturing groups in the regular expression.
+
+```python
+import re
+
+# Regular expression to match dates in yyyy-mm-dd format and capture year, month, and day with descriptive names
+regex_date = r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})'
+
+# Test string with dates
+test_string_with_dates = "The event is scheduled on 2024-12-21. Another important date is 2023-07-15."
+
+# Find all matches and capture groups
+matches = re.finditer(regex_date, test_string_with_dates)
+
+for match in matches:
+    year = match.group('year')
+    month = match.group('month')
+    day = match.group('day')
+    print(f"Year: {year}, Month: {month}, Day: {day}")
+```
+
+#### 2. Regular Expression to Match Magical Dates in `yyyy-mm-dd` Format and Capture the Magical Number:
+
+To match magical dates in `yyyy-mm-dd` format and capture the magical number with the label “magic,” we can use a regular expression with named capturing groups.
+
+```python
+import re
+
+# Regular expression to match magical dates in yyyy-mm-dd format and capture the magical number
+regex_magical_date = r'(?P<century>\d{2})(?P<magic>\d{2})-(?P=magic)-(?P=magic)'
+
+# Test string with dates
+test_string_with_magical_dates = """
+The following are magical dates:
+2008-08-08,
+2011-11-11,
+and some non-magical dates:
+2023-12-01,
+2009-08-07.
+"""
+
+# Find all matches and capture groups
+matches = re.finditer(regex_magical_date, test_string_with_magical_dates)
+
+for match in matches:
+    magical_number = match.group('magic')
+    print(f"Magical number: {magical_number}")
+```
+
+### 📚 Detailed Explanation
+
+#### 1. Regular Expression to Match Any Date in `yyyy-mm-dd` Format:
+
+- **Regular Expression**: `r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})'`
+  - `(?P<year>\d{4})`: Captures the year as a group named "year", which is a sequence of 4 digits.
+  - `-`: Matches the literal hyphen character.
+  - `(?P<month>\d{2})`: Captures the month as a group named "month", which is a sequence of 2 digits.
+  - `-`: Matches the literal hyphen character.
+  - `(?P<day>\d{2})`: Captures the day as a group named "day", which is a sequence of 2 digits.
+  - This pattern ensures that valid dates in the format `yyyy-mm-dd` are matched and the year, month, and day are captured with descriptive names.
+
+#### 2. Regular Expression to Match Magical Dates in `yyyy-mm-dd` Format:
+
+- **Regular Expression**: `r'(?P<century>\d{2})(?P<magic>\d{2})-(?P=magic)-(?P=magic)'`
+  - `(?P<century>\d{2})`: Captures the first two digits of the year (century) as a group named "century".
+  - `(?P<magic>\d{2})`: Captures the last two digits of the year (year within the century) as a group named "magic".
+  - `-`: Matches the literal hyphen character.
+  - `(?P=magic)`: Ensures that the month is the same as the captured year within the century.
+  - `-`: Matches the literal hyphen character.
+  - `(?P=magic)`: Ensures that the day is the same as the captured year within the century.
+  - This pattern ensures that the year minus the century, the month, and the day are the same numbers, making the date "magical" and capturing the magical number with the label “magic.”
+
+#### 🧪 Matching the Strings:
+
+- The `re.finditer` function is used to find all occurrences of the patterns in the given test strings and iterate over the matches.
+
+### 📝 Code Execution:
+
+```python
+import re
+
+# Regular expression to match dates in yyyy-mm-dd format and capture year, month, and day with descriptive names
+regex_date = r'(?P<year>\d{4})-(?P<month>\d{2})-(?P<day>\d{2})'
+
+# Test string with dates
+test_string_with_dates = "The event is scheduled on 2024-12-21. Another important date is 2023-07-15."
+
+# Find all matches and capture groups
+matches = re.finditer(regex_date, test_string_with_dates)
+
+for match in matches:
+    year = match.group('year')
+    month = match.group('month')
+    day = match.group('day')
+    print(f"Year: {year}, Month: {month}, Day: {day}")
+
+# Regular expression to match magical dates in yyyy-mm-dd format and capture the magical number
+regex_magical_date = r'(?P<century>\d{2})(?P<magic>\d{2})-(?P=magic)-(?P=magic)'
+
+# Test string with dates
+test_string_with_magical_dates = """
+The following are magical dates:
+2008-08-08,
+2011-11-11,
+and some non-magical dates:
+2023-12-01,
+2009-08-07.
+"""
+
+# Find all matches and capture groups
+matches = re.finditer(regex_magical_date, test_string_with_magical_dates)
+
+for match in matches:
+    magical_number = match.group('magic')
+    print(f"Magical number: {magical_number}")
+```
+
+### Output:
+
+```
+Year: 2024, Month: 12, Day: 21
+Year: 2023, Month: 07, Day: 15
+Magical number: 08
+Magical number: 11
+```
+
+By following these steps, we ensure that the regular expressions correctly match dates in the `yyyy-mm-dd` format and capture the year, month, and day separately, as well as identify magical dates and capture the magical number.
