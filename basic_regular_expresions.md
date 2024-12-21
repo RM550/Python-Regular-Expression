@@ -559,9 +559,34 @@ By following these steps, we ensure that the regular expression correctly matche
 ---
 ### 📄 Problem 2.9  Group and Capture Parts of the Match 
 
-Create a regular expression that matches any date in `yyyy-mm-dd` format, and separately captures the year, month, and day. The goal is to make it easy to work with these separate values in the code that processes the match. You can assume all dates in the subject text to be valid. The regular expression does not have to exclude things like 9999-99-99, as these won’t occur in the subject text at all.
+
+1. Improve the regular expression for matching "Mary", "Jane", or "Sue" by forcing the match to be a whole word. Use grouping to achieve this with one pair of word boundaries for the whole regex.
+2. Create a regular expression that matches any date in `yyyy-mm-dd` format, and separately captures the year, month, and day.
 
 ### 📝 Answer
+
+#### 1. Improved Regular Expression for Matching "Mary", "Jane", or "Sue" as Whole Words:
+
+To match "Mary", "Jane", or "Sue" as whole words using a single pair of word boundaries and grouping, we can use the following regular expression:
+
+```python
+import re
+
+# Regular expression to match "Mary", "Jane", or "Sue" as whole words
+regex_names = r'\b(Mary|Jane|Sue)\b'
+
+# Test string
+test_string = "Mary, Jane, and Sue went to Mary's house. category and bobcat should not match."
+
+# Find all matches
+matches = re.findall(regex_names, test_string)
+
+print("Matches found:", matches)  # Expected output: ['Mary', 'Jane', 'Sue', 'Mary']
+```
+
+#### 2. Regular Expression to Match Dates in `yyyy-mm-dd` Format:
+
+To match dates in `yyyy-mm-dd` format and separately capture the year, month, and day, we can use the following regular expression:
 
 ```python
 import re
@@ -582,7 +607,15 @@ for match in matches:
 
 ### 📚 Detailed Explanation
 
-#### 🔍 Understanding the Regular Expression:
+#### 1. Improved Regular Expression for Matching "Mary", "Jane", or "Sue":
+
+- **Regular Expression**: `r'\b(Mary|Jane|Sue)\b'`
+  - `\b`: Word boundary assertion ensures that the match is a whole word.
+  - `(Mary|Jane|Sue)`: Grouping to match any of the words "Mary", "Jane", or "Sue".
+  - `\b`: Word boundary assertion ensures that the match is a whole word.
+  - This pattern ensures that "Mary", "Jane", or "Sue" is matched only when it stands alone as a word and not as part of another word.
+
+#### 2. Regular Expression to Match Dates in `yyyy-mm-dd` Format:
 
 - **Regular Expression**: `r'(\d{4})-(\d{2})-(\d{2})'`
   - `(\d{4})`: Captures the year, which is a sequence of 4 digits.
@@ -594,12 +627,23 @@ for match in matches:
 
 #### 🧪 Matching the Strings:
 
-- The `re.findall` function is used to find all occurrences of the patterns in the given test string.
+- The `re.findall` function is used to find all occurrences of the patterns in the given test strings.
 
 ### 📝 Code Execution:
 
 ```python
 import re
+
+# Regular expression to match "Mary", "Jane", or "Sue" as whole words
+regex_names = r'\b(Mary|Jane|Sue)\b'
+
+# Test string
+test_string = "Mary, Jane, and Sue went to Mary's house. category and bobcat should not match."
+
+# Find all matches
+matches = re.findall(regex_names, test_string)
+
+print("Matches found:", matches)  # Expected output: ['Mary', 'Jane', 'Sue', 'Mary']
 
 # Regular expression to match dates in yyyy-mm-dd format and capture year, month, and day
 regex_date = r'(\d{4})-(\d{2})-(\d{2})'
@@ -615,11 +659,4 @@ for match in matches:
     print(f"Year: {year}, Month: {month}, Day: {day}")
 ```
 
-### Output:
-
-```
-Year: 2024, Month: 12, Day: 21
-Year: 2023, Month: 07, Day: 15
-```
-
-By following these steps, we ensure that the regular expression correctly matches dates in the `yyyy-mm-dd` format and captures the year, month, and day separately. This makes it easy to work with these values in the code that processes the match.
+By following these steps, we ensure that the regular expressions match their respective patterns correctly.
