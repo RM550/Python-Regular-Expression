@@ -660,3 +660,89 @@ for match in matches:
 ```
 
 By following these steps, we ensure that the regular expressions match their respective patterns correctly.
+---
+### 📄 Problem 2.10 Match Previously Matched Text Again 
+
+Create a regular expression that matches “magical” dates in `yyyy-mm-dd` format. A date is magical if the year minus the century, the month, and the day of the month are all the same numbers. For example, `2008-08-08` is a magical date. You can assume all dates in the subject text to be valid. The regular expression does not have to exclude things like `9999-99-99`, as these won’t occur in the subject text.
+
+### 📝 Answer
+
+To match "magical" dates, we need a regular expression that captures the year, month, and day, and then checks if the year minus the century, the month, and the day are the same.
+
+Here's the solution:
+
+```python
+import re
+
+# Regular expression to match magical dates in yyyy-mm-dd format
+regex_magical_date = r'(\d{2})(\d{2})-\2-\2'
+
+# Test strings with dates
+test_string_with_dates = """
+The following are magical dates:
+2008-08-08,
+2011-11-11,
+2022-22-22,
+and some non-magical dates:
+2023-12-01,
+2009-08-07.
+"""
+
+# Find all matches and capture groups
+matches = re.findall(regex_magical_date, test_string_with_dates)
+
+# Extract the full date format for each match
+magical_dates = [f"{match[0]}{match[1]}-{match[1]}-{match[1]}" for match in matches]
+
+print("Magical dates found:", magical_dates)
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expression:
+
+- **Regular Expression**: `r'(\d{2})(\d{2})-\2-\2'`
+  - `(\d{2})`: Captures the first two digits of the year (century).
+  - `(\d{2})`: Captures the last two digits of the year (year within the century).
+  - `-\2-`: Ensures that the month is the same as the captured year within the century.
+  - `-\2`: Ensures that the day is the same as the captured year within the century.
+  - This pattern ensures that the year minus the century, the month, and the day are the same numbers, making the date "magical".
+
+#### 🧪 Matching the Strings:
+
+- The `re.findall` function is used to find all occurrences of the "magical" date pattern in the given test string.
+
+### 📝 Code Execution:
+
+```python
+import re
+
+# Regular expression to match magical dates in yyyy-mm-dd format
+regex_magical_date = r'(\d{2})(\d{2})-\2-\2'
+
+# Test strings with dates
+test_string_with_dates = """
+The following are magical dates:
+2008-08-08,
+2011-11-11,
+and some non-magical dates:
+2023-12-01,
+2009-08-07.
+"""
+
+# Find all matches and capture groups
+matches = re.findall(regex_magical_date, test_string_with_dates)
+
+# Extract the full date format for each match
+magical_dates = [f"{match[0]}{match[1]}-{match[1]}-{match[1]}" for match in matches]
+
+print("Magical dates found:", magical_dates)
+```
+
+### Output:
+
+```
+Magical dates found: ['2008-08-08', '2011-11-11']
+```
+
+By following these steps, we ensure that the regular expression correctly matches "magical" dates in the `yyyy-mm-dd` format and captures the full date for further processing.
