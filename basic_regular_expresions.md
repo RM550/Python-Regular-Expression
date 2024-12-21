@@ -2,9 +2,8 @@
 
 Create a regular expression to exactly match this gloriously contrived sentence:
 
-```
 The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
-```
+
 
 ### 📝 Answer
 
@@ -32,9 +31,7 @@ else:
 
 The sentence to match is:
 
-```
-The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~.
-```
+The punctuation characters in the ASCII table are: !"#$%&'()*+,-./:;<=>?@[\]^_`{|}~
 
 This sentence includes a string of punctuation characters from the ASCII table.
 
