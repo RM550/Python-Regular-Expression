@@ -478,3 +478,81 @@ print("Matches for trademark sign in 'test_string_without_trademark':", matches_
    - The print statements display the matches found in each test string.
 
 In summary, the regular expression `r'\u2122'` allows us to match the trademark sign (™) by using its Unicode code point, ensuring that we can identify it even if we cannot type it directly on the keyboard.
+---
+### 📄 Problem 2.8  Match One of Several Alternatives
+
+Create a regular expression that, when applied repeatedly to the text "Mary, Jane, and Sue went to Mary's house", will match "Mary", "Jane", "Sue", and then "Mary" again. Further match attempts should fail.
+
+### 📝 Answer
+
+To achieve this, we can use a regular expression with a combination of word boundaries and a lookahead to ensure we only match the desired names in sequence.
+
+```python
+import re
+
+# Regular expression to match "Mary", "Jane", "Sue", and then "Mary" again
+regex_names = r'\b(Mary|Jane|Sue)\b'
+
+# Test string
+test_string = "Mary, Jane, and Sue went to Mary's house"
+
+# Find all matches
+matches = re.findall(regex_names, test_string)
+
+print("Matches found:", matches)
+```
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expression:
+
+1. **Match "Mary", "Jane", "Sue", and then "Mary" again:**
+   - Regular expression: `r'\b(Mary|Jane|Sue)\b'`
+     - `\b`: Word boundary assertion ensures that the match is a whole word.
+     - `(Mary|Jane|Sue)`: Matches any of the words "Mary", "Jane", or "Sue".
+
+#### 🧪 Matching the Strings:
+
+- The `re.findall` function is used to find all occurrences of "Mary", "Jane", and "Sue" in the given test string.
+
+#### 🖥️ Code Execution:
+
+- The `test_string` contains the names "Mary", "Jane", "Sue", and "Mary" again.
+
+By following these steps, we ensure that the regular expression matches the desired names in sequence.
+
+### Code Execution:
+
+```python
+import re
+
+# Regular expression to match "Mary", "Jane", "Sue", and then "Mary" again
+regex_names = r'\b(Mary|Jane|Sue)\b'
+
+# Test string
+test_string = "Mary, Jane, and Sue went to Mary's house"
+
+# Find all matches
+matches = re.findall(regex_names, test_string)
+
+print("Matches found:", matches)  # Expected output: ['Mary', 'Jane', 'Sue', 'Mary']
+```
+
+### 📝 Explanation of the Code:
+
+1. **Import the `re` module**:
+   - The `re` module in Python provides support for working with regular expressions.
+
+2. **Define the Regular Expression**:
+   - `regex_names = r'\b(Mary|Jane|Sue)\b'`: This regular expression matches the names "Mary", "Jane", and "Sue" as whole words.
+
+3. **Define the Test String**:
+   - `test_string = "Mary, Jane, and Sue went to Mary's house"`: This string contains the names we want to match.
+
+4. **Find All Matches**:
+   - `re.findall(regex_names, test_string)`: This function searches for all occurrences of the names "Mary", "Jane", and "Sue" in the test string.
+
+5. **Print the Results**:
+   - The print statement displays the matches found in the test string.
+
+By following these steps, we ensure that the regular expression correctly matches "Mary", "Jane", "Sue", and "Mary" again, and further match attempts should fail.
