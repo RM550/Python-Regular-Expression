@@ -416,3 +416,65 @@ print("No match for 'cat' in 'bobcat':", not bool(match_cat_in_bobcat))
 - The `test_string_staccato` contains "cat" as part of the word "staccato".
 
 By following these steps, we ensure that the regular expressions match their respective patterns correctly.
+---
+Sure, I'll provide a more detailed explanation for each regular expression and how they work in the context of the problem.
+
+### 📄 Problem 2.7  Unicode Code Points, Categories, Blocks, and Scripts Proble
+
+Use a regular expression to find the trademark sign (™) by specifying its Unicode code point rather than copying and pasting an actual trademark sign.
+
+### 📚 Detailed Explanation
+
+#### 🔍 Understanding the Regular Expression:
+
+1. **Match the Trademark Sign (™) Using Its Unicode Code Point:**
+   - The trademark sign (™) has a Unicode code point of `U+2122`.
+   - In Python regular expressions, Unicode characters can be specified using the `\u` escape sequence followed by the hexadecimal code point.
+   - Regular expression: `r'\u2122'`
+     - `\u2122`: Matches the trademark sign using its Unicode code point.
+
+#### 🧪 Matching the Strings:
+
+- **`test_string_with_trademark`**: This string contains the trademark sign (™), and our regular expression should identify it.
+- **`test_string_without_trademark`**: This string does not contain the trademark sign, so our regular expression should not find any matches.
+
+#### 🖥️ Code Execution:
+
+```python
+import re
+
+# Regular expression to match the trademark sign (™) using its Unicode code point
+regex_trademark = r'\u2122'
+
+# Test strings
+test_string_with_trademark = "This is a trademarked product™."
+test_string_without_trademark = "This product is not trademarked."
+
+# Find all matches for the trademark sign in the test strings
+matches_with_trademark = re.findall(regex_trademark, test_string_with_trademark)
+matches_without_trademark = re.findall(regex_trademark, test_string_without_trademark)
+
+print("Matches for trademark sign in 'test_string_with_trademark':", matches_with_trademark)
+print("Matches for trademark sign in 'test_string_without_trademark':", matches_without_trademark)
+```
+
+### 📝 Explanation of the Code:
+
+1. **Import the `re` module**:
+   - The `re` module in Python provides support for working with regular expressions.
+
+2. **Define the Regular Expression**:
+   - `regex_trademark = r'\u2122'`: This regular expression matches the trademark sign using its Unicode code point.
+
+3. **Define Test Strings**:
+   - `test_string_with_trademark = "This is a trademarked product™."`: This string contains the trademark sign.
+   - `test_string_without_trademark = "This product is not trademarked."`: This string does not contain the trademark sign.
+
+4. **Find All Matches**:
+   - `re.findall(regex_trademark, test_string_with_trademark)`: This function searches for all occurrences of the trademark sign in `test_string_with_trademark`.
+   - `re.findall(regex_trademark, test_string_without_trademark)`: This function searches for all occurrences of the trademark sign in `test_string_without_trademark`.
+
+5. **Print the Results**:
+   - The print statements display the matches found in each test string.
+
+In summary, the regular expression `r'\u2122'` allows us to match the trademark sign (™) by using its Unicode code point, ensuring that we can identify it even if we cannot type it directly on the keyboard.
