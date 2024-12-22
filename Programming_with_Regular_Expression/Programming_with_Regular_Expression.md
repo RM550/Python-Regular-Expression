@@ -1471,3 +1471,4 @@ This ensures the regex correctly matches bold tags and their content regardless 
    - `print("Original text:", example_text)`
    - `print("Modified text:", result_text)`
    - These lines print the original and modified strings to show the effect of the replacement.
+---
