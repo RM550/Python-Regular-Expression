@@ -1030,3 +1030,106 @@ This ensures the regex correctly matches bold tags and their content regardless 
    - `print("Numbers found within bold sections:", numbers_in_bold)`
    - This prints the list of all numbers found within bold sections.
 ---
+# Problem 3.12 🚩
+
+## Replacing All Matches of a Regular Expression ✨
+You want to replace all matches of the regular expression `before` with the replacement text `after`.
+
+This exercise helps us understand how to use regular expressions to replace all instances of a pattern within a string. Let's break it down in a detailed way! 🕵️‍♂️
+
+## Solution 🛠️
+
+To replace all matches of a regular expression in Python, we can use the `re.sub()` function. This function searches for the pattern in the string and replaces each occurrence with the specified replacement text.
+
+### Example in Python:
+
+```python
+import re
+
+# Regular expression pattern to find
+before_pattern = r'before'
+
+# Replacement text
+replacement_text = 'after'
+
+# The text in which we want to replace the pattern
+example_text = 'This is the before text. Here is another before example.'
+
+# Using re.sub() to replace all matches
+result_text = re.sub(before_pattern, replacement_text, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+🧐 Here’s what this means:
+
+- **`re.sub()`** 🛡️: This function takes three arguments: the pattern to search for, the replacement text, and the string to search within. It returns a new string with all occurrences of the pattern replaced by the replacement text.
+- **Replacing Matches**: By using `re.sub()`, we can easily replace all instances of the pattern within the string.
+
+## Explanation 🌟
+
+### Why Use `re.sub()`?
+
+The `re.sub()` function is useful for performing substitutions on strings based on regular expression patterns. It allows for flexible and powerful search-and-replace functionality, making it easy to modify strings according to complex patterns.
+
+### Example:
+
+If we want to replace all occurrences of the word "before" with "after" in the string "This is the before text. Here is another before example.", we use `re.sub()` as shown in the example.
+
+## Tips for Beginners 🐣
+
+- **Practice with Simple Patterns**: Start with simple patterns and replacements to get comfortable with `re.sub()`.
+- **Escape Special Characters**: If your pattern or replacement text contains special regex characters, make sure to escape them.
+
+## Case-Insensitive Replacement 🔠
+
+To make the replacement case-insensitive, use the `re.IGNORECASE` flag:
+
+```python
+import re
+
+# Compiling the regular expression with case insensitivity
+before_pattern = re.compile(r'before', re.IGNORECASE)
+
+# Replacement text
+replacement_text = 'after'
+
+# The text in which we want to replace the pattern
+example_text = 'This is the Before text. Here is another before example.'
+
+# Using re.sub() to replace all matches
+result_text = before_pattern.sub(replacement_text, example_text)
+
+# Printing the result
+print("Original text:", example_text)
+print("Modified text:", result_text)
+```
+
+This will make the replacement case-insensitive, replacing "Before" and "before" with "after".
+
+### Detailed Explanation for Each Step:
+
+1. **Importing the `re` Module**:
+   - The `re` module is Python's regular expression library. Import it to use regex functions.
+
+2. **Defining the Regular Expression Pattern and Replacement Text**:
+   - `before_pattern = r'before'`
+     - This pattern matches the word "before".
+   - `replacement_text = 'after'`
+     - This is the text that will replace each match of the pattern.
+
+3. **Example Text**:
+   - `example_text = 'This is the before text. Here is another before example.'`
+   - This is the string where we want to replace the pattern.
+
+4. **Using `re.sub()` for Replacement**:
+   - `result_text = re.sub(before_pattern, replacement_text, example_text)`
+   - This function searches for the pattern in the string and replaces each occurrence with the replacement text.
+
+5. **Printing the Result**:
+   - `print("Original text:", example_text)`
+   - `print("Modified text:", result_text)`
+   - These lines print the original and modified strings to show the effect of the replacement.
+---
